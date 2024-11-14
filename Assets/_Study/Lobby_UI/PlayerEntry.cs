@@ -1,12 +1,8 @@
-using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using PhotonHashtable = ExitGames.Client.Photon.Hashtable; // 클래스 임시 이름 변경을 해주는 using구문
 
 public class PlayerEntry : MonoBehaviour
 {
@@ -18,7 +14,7 @@ public class PlayerEntry : MonoBehaviour
     {
         if (player.IsMasterClient)
         {
-            nameText.text = $"*{player.NickName}";
+            nameText.text = $"Master\n{player.NickName}";
         }
         else
         {
@@ -26,7 +22,7 @@ public class PlayerEntry : MonoBehaviour
         }
 
         readyButton.gameObject.SetActive(true);
-        readyButton.interactable = player ==  PhotonNetwork.LocalPlayer;
+        readyButton.interactable = player == PhotonNetwork.LocalPlayer;
 
         if (player.GetReady())
         {

@@ -53,7 +53,7 @@ public class MainPanel : MonoBehaviour
         // 비어있는 방이 없을 때, 스스로 방을 만들어 들어가는 방식
         string name = $"Room {Random.Range(1000, 10000)}";
         RoomOptions options = new RoomOptions() { MaxPlayers = 8 };
-        PhotonNetwork.JoinRandomOrCreateRoom(roomName : name, roomOptions : options); 
+        PhotonNetwork.JoinRandomOrCreateRoom(roomName: name, roomOptions: options);
     }
 
     public void JoinLobby()

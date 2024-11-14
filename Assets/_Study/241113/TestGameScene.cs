@@ -47,9 +47,9 @@ public class TestGameScene : MonoBehaviourPunCallbacks
 
     private void PlayerSpawn()
     {
-        Vector3 randomPos = new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
+        Vector3 randomPos = new Vector3(Random.Range(-5f, 5f), 1, Random.Range(-5f, 5f));
 
         // 경로가 필요할 땐, "폴더/프리팹이름" 형식으로 작성 시 사용이 가능해짐.
-        PhotonNetwork.Instantiate("TestPlayer", randomPos, Quaternion.identity);
+        PhotonNetwork.Instantiate("Ex)TestPlayer", randomPos, Quaternion.identity);
     }
 }
