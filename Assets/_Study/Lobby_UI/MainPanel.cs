@@ -1,3 +1,5 @@
+using Firebase.Auth;
+using Firebase.Extensions;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
@@ -66,5 +68,30 @@ public class MainPanel : MonoBehaviour
     {
         Debug.Log("로그아웃 요청");
         PhotonNetwork.Disconnect();
+    }
+
+    public void DeleteUser()
+    {
+        FirebaseUser user = BackendManager.Auth.CurrentUser;
+
+        // 현재 로그인 된 유저의 정보를 토대로 하여, 해당 유저의 이메일 인증 정보를 삭제를 요청할 수 있다.
+        user.DeleteAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCanceled)
+            {
+                Debug.LogError("DeleteAsync was canceled.");
+                return;
+            }
+            if (task.IsFaulted)
+            {
+                Debug.LogError("DeleteAsync encountered an error: " + task.Exception);
+                return;
+            }
+
+            // 요청에 성공하였다면, 유저의 인증 정보가 정상적으로 삭제되었다는 콘솔 메세지를 출력한다.
+            Debug.Log("User deleted successfully.");
+            // 이후 유저가 로그인 화면으로 돌아갈 수 있도록, 현재 유저의 접속을 끊는다.
+            PhotonNetwork.Disconnect();
+        });
     }
 }
